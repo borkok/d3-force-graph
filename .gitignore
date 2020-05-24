@@ -24,3 +24,5 @@ yarn-error.log*
 yarn.lock
 .idea/*
 debug.log
+/src/store/downloaders/marvel/apikey.js
+/package-lock.json

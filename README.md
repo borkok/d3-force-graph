@@ -1,7 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a proof of concept for using d3-force library to visualize relationships and a way to learn React.
+
+User can retrieve data from Marvel or Game of Thrones public API and visualize relations between Marvel characters or Game of Thrones figures. 
+
+## Fetching from Marvel
+
+In order to fetch from Marvel you need to get your public and private api key from developer.marvel.com
+Then put both keys in apikey.js file stored here: 
+`src/store/downloaders/marvel/apikey.js`
+
+File is ignored by git, so it was and not added to git hub repository.
+
+`apikey.js` content should be:  
+```
+export const MARVEL_API_PRIVATE_KEY = 'put-your-private-key';
+export const MARVEL_API_PUBLIC_KEY = 'put-your-public-key';
+```
 
 ## Available Scripts
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 In the project directory, you can run:
 
 ### `yarn start`

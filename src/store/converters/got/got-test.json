@@ -1,0 +1,51 @@
+{"data":[
+  {
+    "place": [
+      "Dragonstone ",
+      "Westeros"
+    ],
+    "participants": [
+      "Lyanna Stark"
+    ],
+    "factions": [
+      "House Baratheon of Dragonstone",
+      "House Baratheon of Dragonstone",
+      "House Targaryen",
+      "House Targaryen"
+    ],
+    "leaders": [],
+    "casualties": [],
+    "_id": "5cc074be04e71a0010b85983",
+    "name": "Abandonment of Dragonstone",
+    "slug": "Abandonment_of_Dragonstone",
+    "conflict": "War of the Five Kings / Daenerys Targaryen's invasion of Westeros",
+    "createdAt": "2019-04-24T14:37:50.793Z",
+    "updatedAt": "2019-04-24T14:37:50.793Z",
+    "__v": 0
+  },
+  {
+    "place": [
+      "Westeros"
+    ],
+    "participants": [
+      "Prince of Dragonstone",
+      "Rhaegar Targaryen",
+      "Lyanna Stark"
+    ],
+    "factions": [
+      "House Targaryen",
+      "House Targaryen",
+      "House Stark",
+      "House Stark"
+    ],
+    "leaders": [],
+    "casualties": [],
+    "_id": "5cc074be04e71a0010b85984",
+    "name": "Abduction of Lyanna Stark",
+    "slug": "Abduction_of_Lyanna_Stark",
+    "conflict": "Robert's Rebellion",
+    "createdAt": "2019-04-24T14:37:50.793Z",
+    "updatedAt": "2019-04-24T14:37:50.793Z",
+    "__v": 0
+  }
+]}
