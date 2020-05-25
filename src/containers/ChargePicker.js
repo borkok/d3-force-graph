@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Grommet, RangeInput} from "grommet/es6";
 import InputLabel from "@material-ui/core/InputLabel";
-import {connect} from "react-redux";
 import {changeCharge} from "../store/actionCreators";
+import {useDispatch, useSelector} from "react-redux";
 
 const theme = {
     global: {
@@ -22,8 +22,12 @@ const theme = {
     }
 };
 
-const ChargePicker = ({chargeValue, onChange}) => {
+const ChargePicker = () => {
+    const chargeValue = useSelector(state => state.charge);
     const [value, setValue] = useState(chargeValue);
+
+    const dispatch = useDispatch();
+    const onChange = charge => changeCharge(dispatch, charge);
 
     const onChargeChange = (event) => {
         const value = event.target.value;
@@ -47,16 +51,4 @@ const ChargePicker = ({chargeValue, onChange}) => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        chargeValue: state.charge
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onChange: charge => changeCharge(dispatch, charge)
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChargePicker);
+export default ChargePicker;

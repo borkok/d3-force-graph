@@ -1,23 +1,21 @@
 import React from 'react';
 import Graph from "../../components/graph/graph";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import useWindowDimensions from "../../utils/useWindowDimensions";
 import Spinner from "../../components/spinner/spinner";
 
-export const RelationVisualizer = (props) => {
+const RelationVisualizer = ({margin}) => {
+    const loading = useSelector(state => state.loading);
+    const charge = useSelector(state => state.charge);
+    const data = useSelector(state => {
+        return {"nodes": state.nodes, "links": state.links};
+    });
+
     const { height, width } = useWindowDimensions();
-    if (props.loading) {
+    if (loading) {
         return <Spinner/>;
     }
-    return <Graph data={props.data} width={width - props.margin} height={height - props.margin} charge={props.charge}/>;
+    return <Graph data={data} width={width - margin} height={height - margin} charge={charge}/>;
 };
 
-const mapStateToProps = state => {
-    return {
-        loading: state.loading,
-        charge: state.charge,
-        data: state
-    }
-};
-
-export default connect(mapStateToProps)(RelationVisualizer);
+export default RelationVisualizer;

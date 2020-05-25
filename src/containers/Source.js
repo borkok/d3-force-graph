@@ -2,11 +2,13 @@ import React, {useState} from 'react';
 import Combobox from "../components/combobox/combobox";
 import {sources} from "../data/sources";
 import RefreshButton from "../components/refreshButton";
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 import {load} from "../store/actionCreators";
 
-const Source = ({onRefresh}) => {
+const Source = () => {
     const [selectedSource, setSource] = useState('');
+    const dispatch = useDispatch();
+    const onRefresh = source => load(dispatch, source);
 
     const handleChange = selectedSource => {
         setSource(selectedSource);
@@ -28,10 +30,4 @@ const Source = ({onRefresh}) => {
     );
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onRefresh: (source) => load(dispatch, source)
-    }
-};
-
-export default connect(null, mapDispatchToProps)(Source);
+export default Source;
