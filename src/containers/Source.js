@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import Combobox from "../components/combobox/combobox";
+import Combobox from "../components/Combobox/Combobox";
 import {sources} from "../data/sources";
-import RefreshButton from "../components/refreshButton";
+import RefreshButton from "../components/RefreshButton";
 import {useDispatch} from "react-redux";
 import {load} from "../store/actionCreators";
 

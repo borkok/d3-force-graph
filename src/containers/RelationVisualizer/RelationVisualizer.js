@@ -1,8 +1,8 @@
 import React from 'react';
-import Graph from "../../components/graph/graph";
+import Graph from "../../components/Graph/Graph";
 import {useSelector} from "react-redux";
 import useWindowDimensions from "../../utils/useWindowDimensions";
-import Spinner from "../../components/spinner/spinner";
+import Spinner from "../../components/Spinner/Spinner";
 
 const RelationVisualizer = ({margin}) => {
     const loading = useSelector(state => state.loading);

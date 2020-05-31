@@ -2,7 +2,7 @@ import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import React from "react";
-import Combobox from "./combobox";
+import Combobox from "./Combobox";
 import {InputLabel, MenuItem, Select} from "@material-ui/core";
 
 // React 16 Enzyme adapter

@@ -3,8 +3,8 @@ import Adapter from 'enzyme-adapter-react-16';
 import React from "react";
 import * as redux from 'react-redux';
 import RelationVisualizer from "./RelationVisualizer";
-import Graph from "../../components/graph/graph";
-import Spinner from "../../components/spinner/spinner";
+import Graph from "../../components/Graph/Graph";
+import Spinner from "../../components/Spinner/Spinner";
 
 // React 16 Enzyme adapter
 configure({ adapter: new Adapter() });
