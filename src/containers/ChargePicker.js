@@ -37,14 +37,14 @@ const ChargePicker = () => {
 
     return (
         <div>
-            <InputLabel id="charge-label">Ładunek ({value})</InputLabel>
+            <InputLabel id="charge-label">Charge ({value})</InputLabel>
             <Grommet theme={theme}>
                 <RangeInput
                     value={value}
                     min={-1000}
                     max={0}
                     step={10}
-                    name="Odpychanie"
+                    name="Repulsion"
                     onChange={onChargeChange}/>
             </Grommet>
         </div>

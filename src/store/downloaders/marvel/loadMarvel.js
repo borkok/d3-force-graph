@@ -2,11 +2,12 @@ import {LOAD, LOADING_START, LOADING_STOP} from "../../actions";
 import {convert as convertMarvel} from "../../converters/marvel/convert-marvel";
 import axios from "axios";
 import {MARVEL_API_PRIVATE_KEY, MARVEL_API_PUBLIC_KEY} from './apikey';
+import md5 from 'crypto-js/md5';
 
 export const loadMarvelComics = async (dispatch) => {
-    const crypto = require('crypto');
+
     const timestamp = Date.now();
-    const md5hash = crypto.createHash('md5').update('' + timestamp + MARVEL_API_PRIVATE_KEY + MARVEL_API_PUBLIC_KEY).digest('hex');
+    const md5hash = md5('' + timestamp + MARVEL_API_PRIVATE_KEY + MARVEL_API_PUBLIC_KEY);
     const marvelUrl = "https://gateway.marvel.com:443/v1/public/comics?offset=0&limit=100" +
         "&apikey=" + MARVEL_API_PUBLIC_KEY +
         "&ts=" + timestamp +

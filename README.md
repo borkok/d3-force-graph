@@ -8,7 +8,7 @@ In order to fetch from Marvel you need to get your public and private api key fr
 Then put both keys in apikey.js file stored here: 
 `src/store/downloaders/marvel/apikey.js`
 
-File is ignored by git, so it was and not added to git hub repository.
+File is ignored by git, so it was and not added to github repository.
 
 `apikey.js` content should be:  
 ```
@@ -20,6 +20,11 @@ export const MARVEL_API_PUBLIC_KEY = 'put-your-public-key';
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 In the project directory, you can run:
+
+### `yarn install`
+
+Installs all dependencies.<br />
+You only need to run it once, after cloning the repository to your local machine.
 
 ### `yarn start`
 

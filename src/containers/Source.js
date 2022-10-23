@@ -22,7 +22,7 @@ const Source = () => {
         <table>
             <tbody>
             <tr>
-                <td><Combobox items={sources} changed={handleChange} label="Wybierz kolekcję"/></td>
+                <td><Combobox items={sources} changed={handleChange} label="Select collection:"/></td>
                 <td><RefreshButton clicked={handleRefresh}/></td>
             </tr>
             </tbody>
