@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import Combobox from "../components/Combobox/Combobox";
 import {sources} from "../data/sources";
 import RefreshButton from "../components/RefreshButton";
@@ -8,15 +8,13 @@ import {load} from "../store/actionCreators";
 const Source = () => {
     const [selectedSource, setSource] = useState('');
     const dispatch = useDispatch();
-    const onRefresh = source => load(dispatch, source);
+    const handleChange = useCallback(source => {
+        setSource(source);
+    }, []);
 
-    const handleChange = selectedSource => {
-        setSource(selectedSource);
-    };
-
-    const handleRefresh = (event) => {
-        onRefresh(selectedSource);
-    };
+    const handleRefresh = useCallback(() => {
+        load(dispatch, selectedSource)
+    }, [dispatch, selectedSource]);
 
     return (
         <table>
