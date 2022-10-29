@@ -1,8 +1,7 @@
-import {LOAD, LOADING_START, LOADING_STOP} from "../../actions";
 import {convert as convertMarvel} from "../../converters/marvel/convert-marvel";
-import axios from "axios";
 import {MARVEL_API_PRIVATE_KEY, MARVEL_API_PUBLIC_KEY} from './apikey';
 import md5 from 'crypto-js/md5';
+import {download} from "../utils/common";
 
 export const loadMarvelComics = async (dispatch) => {
 
@@ -13,12 +12,5 @@ export const loadMarvelComics = async (dispatch) => {
         "&ts=" + timestamp +
         "&hash=" + md5hash;
 
-    dispatch({type: LOADING_START});
-    try {
-        const result = await axios.get(marvelUrl);
-        dispatch({type: LOAD, payload: convertMarvel(result)});
-    } catch (error) {
-        console.error(error, "URL = " + marvelUrl);
-        dispatch({type: LOADING_STOP});
-    }
+    await download(dispatch, marvelUrl, convertMarvel);
 };
