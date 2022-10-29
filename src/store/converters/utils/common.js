@@ -1,22 +1,24 @@
 import {combinations} from "./combinations";
+import jmespath from "jmespath";
 
-const extractNodes_ = (episodes, extractEpisodeCharacters) => {
-    const characters = episodes.flatMap(extractEpisodeCharacters);
+const extractNodes_ = (episodes, episodeCharactersPath) => {
+    const characters = episodes.flatMap(episode => jmespath.search(episode, episodeCharactersPath));
     const uniqueCharacters = new Set(characters);
     return [...uniqueCharacters].map(name => ({id: name}));
 };
-const extractLinksFromOneEpisode_ = (episode, extractEpisodeCharacters, extractEpisodeId) => {
-    const elements = extractEpisodeCharacters(episode);
+const extractLinksFromOneEpisode_ = (episode, episodeCharactersPath, episodeCategoryPath) => {
+    const elements = jmespath.search(episode, episodeCharactersPath);
     const links = combinations(elements);
-    let category = extractEpisodeId(episode);
+    let category = jmespath.search(episode, episodeCategoryPath);
     return links.map(link => ({...link, category: category}));
 };
 
-const extractLinks_ = (episodes, extractEpisodeCharacters, extractEpisodeId) => episodes
-    .flatMap(episode => extractLinksFromOneEpisode_(episode, extractEpisodeCharacters, extractEpisodeId));
+const extractLinks_ = (episodes, episodeCharactersPath, episodeCategoryPath) => episodes
+    .flatMap(episode => extractLinksFromOneEpisode_(episode, episodeCharactersPath, episodeCategoryPath));
 
-export const convert_ = (episodes, extractEpisodeCharacters, extractEpisodeId) => {
-    const nodes = extractNodes_(episodes, extractEpisodeCharacters);
-    const links = extractLinks_(episodes, extractEpisodeCharacters, extractEpisodeId);
+export const convert_ = (payload, episodesPath, episodeCharactersPath, episodeCategoryPath) => {
+    const episodes = jmespath.search(payload, episodesPath);
+    const nodes = extractNodes_(episodes, episodeCharactersPath);
+    const links = extractLinks_(episodes, episodeCharactersPath, episodeCategoryPath);
     return {nodes: nodes, links: links};
 };
