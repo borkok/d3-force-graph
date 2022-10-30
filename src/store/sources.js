@@ -28,4 +28,14 @@ export const sources = [
             episodeCategoryPath: "_id"
         }
     },
+    {
+        label: "Breaking Bad",
+        id: "Breaking Bad",
+        url: "https://www.breakingbadapi.com/api/episodes",
+        config: {
+            episodesPath: "data",
+            episodeCharactersPath: "characters",
+            episodeCategoryPath: "series"
+        }
+    },
 ];
