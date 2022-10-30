@@ -1,7 +1,7 @@
 import React from 'react';
 import Graph from "../../components/Graph/Graph";
 import {useSelector} from "react-redux";
-import useWindowDimensions from "../../utils/useWindowDimensions";
+import useWindowDimensions from "./useWindowDimensions";
 import Spinner from "../../components/Spinner/Spinner";
 
 const RelationVisualizer = ({margin}) => {

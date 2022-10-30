@@ -1,4 +1,4 @@
-import {combinations} from "./combinations";
+import {combinations} from "./utils/combinations";
 import jmespath from "jmespath";
 
 const extractNodes_ = (episodes, episodeCharactersPath) => {
@@ -16,7 +16,7 @@ const extractLinksFromOneEpisode_ = (episode, episodeCharactersPath, episodeCate
 const extractLinks_ = (episodes, episodeCharactersPath, episodeCategoryPath) => episodes
     .flatMap(episode => extractLinksFromOneEpisode_(episode, episodeCharactersPath, episodeCategoryPath));
 
-export const convert_ = (payload, episodesPath, episodeCharactersPath, episodeCategoryPath) => {
+export const convert = (payload, {episodesPath, episodeCharactersPath, episodeCategoryPath}) => {
     const episodes = jmespath.search(payload, episodesPath);
     const nodes = extractNodes_(episodes, episodeCharactersPath);
     const links = extractLinks_(episodes, episodeCharactersPath, episodeCategoryPath);

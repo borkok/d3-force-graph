@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import Combobox from "../components/Combobox/Combobox";
-import {sources} from "../data/sources";
+import {sources} from "../store/sources";
 import RefreshButton from "../components/RefreshButton";
 import {useDispatch} from "react-redux";
 import {load} from "../store/actionCreators";
@@ -20,7 +20,7 @@ const Source = () => {
         <table>
             <tbody>
             <tr>
-                <td><Combobox items={sources} changed={handleChange} label="Select collection:"/></td>
+                <td><Combobox items={sources.map(source => ({"label": source.label, "value": source.id}))} changed={handleChange} label="Select collection:"/></td>
                 <td><RefreshButton clicked={handleRefresh}/></td>
             </tr>
             </tbody>

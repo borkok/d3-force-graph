@@ -1,5 +1,5 @@
-import {LOAD, LOADING_START, LOADING_STOP} from "../../actions";
-import {download} from "./common";
+import {LOAD, LOADING_START, LOADING_STOP} from "../store/actions";
+import {download} from "./download";
 import * as axios from "axios";
 
 jest.mock("axios");

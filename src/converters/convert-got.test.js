@@ -1,6 +1,6 @@
 import events from './got-test.json';
-import {convert} from "./convert-got";
-import {compareLinks} from "../utils/compareLinks";
+import {compareLinks} from "./utils/compareLinks";
+import {convert} from "./convert";
 
 const expectedNodes = [
     {id:"Lyanna Stark"},
@@ -15,7 +15,14 @@ const expectedLinks = [
 ];
 
 it('should convert GOT events to nodes-links', () => {
-    const result = convert(events);
+    const result = convert(
+        events,
+        {
+            "episodesPath": "data",
+            "episodeCharacterPath": "participants",
+            "episodeCategoryPath": "_id"
+        }
+    );
     const nodes = result.nodes.sort((a, b) => a.id.localeCompare(b.id));
     expect(nodes).toEqual(expectedNodes);
     const links = result.links.sort(compareLinks);

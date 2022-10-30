@@ -1,6 +1,6 @@
-import {convert} from './convert-marvel';
 import comics from './marvel-comics-test.json';
-import {compareLinks} from "../utils/compareLinks";
+import {compareLinks} from "./utils/compareLinks";
+import {convert} from "./convert";
 
 const expectedNodes = [
     {id: "Archangel"},  //2
@@ -38,7 +38,14 @@ const expectedLinks = [
 ];
 
 it('should convert simple comics json to nodes-links object', function () {
-    const result = convert(comics);
+    const result = convert(
+        comics,
+        {
+            "episodesPath": "data.data.results",
+            "episodeCharacterPath": "characters.items[*].name",
+            "episodeCategoryPath": "id"
+        }
+    );
     const nodes = result.nodes.sort((a, b) => a.id.localeCompare(b.id));
     expect(nodes).toEqual(expectedNodes);
     const links = result.links.sort(compareLinks);

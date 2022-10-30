@@ -1,23 +1,20 @@
 import {LOAD, NEW_CHARGE} from "./actions";
-import * as sources from '../data/sources';
+import {MISERABLES, sources} from './sources';
 import {initialState} from "./initialState";
-import {loadMiserables} from "./downloaders/miserables/loadMiserables";
-import {loadMarvelComics} from "./downloaders/marvel/loadMarvel";
-import {loadGotEvents} from "./downloaders/got/loadGot";
+import {download} from "../downloaders/download";
+import miserables from "./data/miserables.json";
 
 export const load = (dispatch, from) => {
-    switch (from) {
-        case sources.LES_MISERABLES:
-            loadMiserables(dispatch);
-            break;
-        case sources.MARVEL:
-            loadMarvelComics(dispatch);
-            break;
-        case sources.GOT:
-            loadGotEvents(dispatch);
-            break;
-        default:
-            dispatch({type: LOAD, payload: initialState});
+    let selectedSource = sources.filter(source_ => source_.id === from);
+    if (!selectedSource.length) {
+        dispatch({type: LOAD, payload: initialState});
+    } else {
+        selectedSource = selectedSource[0];
+        if (selectedSource.url === MISERABLES) {
+            dispatch({type: LOAD, payload: miserables});
+        } else {
+            download(dispatch, selectedSource.url, selectedSource.config);
+        }
     }
 };
 
