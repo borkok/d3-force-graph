@@ -6,36 +6,38 @@ export const sources = [
     {
         label: "Les Miserables",
         id: "Les Miserables",
-        url: MISERABLES
+        url: MISERABLES,
+        readonly: true,
+
+        episodesPath: "--",
+        episodeCharactersPath: "--",
+        episodeCategoryPath: "--"
     },
     {
         label: "Marvel",
         id: "Marvel",
         url: getMarvelUrl(),
-        config: {
-            episodesPath: "data.data.results",
-            episodeCharactersPath: "characters.items[*].name",
-            episodeCategoryPath: "id"
-        }
+        readonly: true,
+        episodesPath: "data.data.results",
+        episodeCharactersPath: "characters.items[*].name",
+        episodeCategoryPath: "id"
     },
     {
         label: "Game of Thrones",
         id: "Game of Thrones",
         url: "https://api.got.show/api/show/events",
-        config: {
-            episodesPath: "data",
-            episodeCharactersPath: "participants",
-            episodeCategoryPath: "_id"
-        }
+        readonly: true,
+        episodesPath: "data",
+        episodeCharactersPath: "participants",
+        episodeCategoryPath: "_id"
     },
     {
-        label: "Breaking Bad",
-        id: "Breaking Bad",
+        label: "Custom",
+        id: "Custom",
         url: "https://www.breakingbadapi.com/api/episodes",
-        config: {
-            episodesPath: "data",
-            episodeCharactersPath: "characters",
-            episodeCategoryPath: "series"
-        }
+        readonly: false,
+        episodesPath: "data",
+        episodeCharactersPath: "characters",
+        episodeCategoryPath: "series"
     },
 ];

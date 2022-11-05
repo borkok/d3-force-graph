@@ -7,9 +7,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles(theme => ({
     formControl: {
-        margin: theme.spacing(1),
         fullWidth: true,
-        minWidth: 160,
+        minWidth: 200,
     },
 }));
 
@@ -40,9 +39,10 @@ const Combobox = ({items, changed, label}) => {
 
     return (
         <div>
-            <FormControl className={classes.formControl}>
+            <FormControl variant="filled" className={classes.formControl}>
                 <InputLabel id="select-label">{label}</InputLabel>
                 <Select
+
                     labelId="select-label"
                     id="select"
                     open={open}
@@ -55,7 +55,7 @@ const Combobox = ({items, changed, label}) => {
                         <em>None</em>
                     </MenuItem>
                     {
-                        items ? items.map(item => <MenuItem value={item.value} key={item.value}>{item.label}</MenuItem>): null
+                        items ? items.map(item => <MenuItem value={item.value} key={item.label}>{item.label}</MenuItem>): null
                     }
                 </Select>
             </FormControl>

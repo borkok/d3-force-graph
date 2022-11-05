@@ -1,19 +1,21 @@
 import {LOAD, NEW_CHARGE} from "./actions";
-import {MISERABLES, sources} from './sources';
+import {MISERABLES} from './sources';
 import {initialState} from "./initialState";
 import {download} from "../downloaders/download";
 import miserables from "./data/miserables.json";
 
-export const load = (dispatch, from) => {
-    let selectedSource = sources.filter(source_ => source_.id === from);
-    if (!selectedSource.length) {
+export const load = (dispatch, selectedSource) => {
+    if (selectedSource === undefined) {
         dispatch({type: LOAD, payload: initialState});
     } else {
-        selectedSource = selectedSource[0];
         if (selectedSource.url === MISERABLES) {
             dispatch({type: LOAD, payload: miserables});
         } else {
-            download(dispatch, selectedSource.url, selectedSource.config);
+            download(dispatch, selectedSource.url, {
+                episodesPath: selectedSource.episodesPath,
+                episodeCharactersPath: selectedSource.episodeCharactersPath,
+                episodeCategoryPath: selectedSource.episodeCategoryPath
+            });
         }
     }
 };
