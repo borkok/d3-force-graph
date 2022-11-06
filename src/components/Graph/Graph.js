@@ -10,7 +10,7 @@ const Graph = ({data, width, height, charge}) => {
     );
 
     return (
-        <div><svg ref={canvas}/></div>
+        <div><svg ref={canvas} data-testid="svg-canvas" /></div>
     );
 };
 

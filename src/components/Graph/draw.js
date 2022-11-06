@@ -55,6 +55,7 @@ export const drawGraph = (graphData, width, height, charge, canvas) => {
     const svg = d3.select(canvas)
         .attr("width", width)
         .attr("height", height)
+        .attr("strength", charge)
         .style("border", "1px solid black")
         .style("font", "12px sans-serif");
 
@@ -67,6 +68,7 @@ export const drawGraph = (graphData, width, height, charge, canvas) => {
         .data(links)
         .join("line")
         //.attr("stroke-width", d => Math.sqrt(d.value))
+        .attr("data-testid", "line")
         .attr("stroke", d => color(d.category));
 
     const node = svg.append("g")
@@ -77,6 +79,7 @@ export const drawGraph = (graphData, width, height, charge, canvas) => {
         .enter().append("circle")
         .attr("r", radius)
         .attr("fill", d => color(d.group))
+        .attr("data-testid", "circle")
         .call(drag(simulation));
 
     const text = svg.append("g")

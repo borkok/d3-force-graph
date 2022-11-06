@@ -42,7 +42,7 @@ it('should convert simple comics json to nodes-links object', function () {
         comics,
         {
             "episodesPath": "data.data.results",
-            "episodeCharacterPath": "characters.items[*].name",
+            "episodeCharactersPath": "characters.items[*].name",
             "episodeCategoryPath": "id"
         }
     );

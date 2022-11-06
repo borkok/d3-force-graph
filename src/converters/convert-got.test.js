@@ -19,7 +19,7 @@ it('should convert GOT events to nodes-links', () => {
         events,
         {
             "episodesPath": "data",
-            "episodeCharacterPath": "participants",
+            "episodeCharactersPath": "participants",
             "episodeCategoryPath": "_id"
         }
     );

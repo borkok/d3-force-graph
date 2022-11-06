@@ -3,7 +3,7 @@ import './Spinner.css';
 
 const Spinner = () => {
     return (
-        <div className="loader"><h1>Loading ...</h1></div>
+        <div className="loader" data-testid="spinner"><h1>Loading ...</h1></div>
     );
 };
 

@@ -42,7 +42,7 @@ const Combobox = ({items, changed, label}) => {
             <FormControl variant="filled" className={classes.formControl}>
                 <InputLabel id="select-label">{label}</InputLabel>
                 <Select
-
+                    data-testid="testselect"
                     labelId="select-label"
                     id="select"
                     open={open}
