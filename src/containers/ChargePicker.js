@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Grommet, RangeInput} from "grommet/es6";
-import InputLabel from "@material-ui/core/InputLabel";
+import InputLabel from "@mui/material/InputLabel";
 import {changeCharge} from "../store/actionCreators";
 import {useDispatch, useSelector} from "react-redux";
 

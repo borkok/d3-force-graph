@@ -1,7 +1,7 @@
 import React from "react";
-import RefreshIcon from '@material-ui/icons/Refresh';
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
+import RefreshIcon from '@mui/icons-material/Refresh';
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 
 const RefreshButton = ({clicked}) => {
     return <Tooltip title="Refresh graph">
