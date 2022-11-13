@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import * as d3 from "d3";
 
 /**
  * <p>Draws force-directed graph.</p>
@@ -36,107 +36,127 @@ import * as d3 from 'd3';
  * @param canvas canvas reference
  */
 export const drawGraph = (graphData, width, height, charge, canvas) => {
-    const nodes = graphData.nodes.map(d => Object.create(d));
-    const links = graphData.links.map(d => Object.create(d));
+  const nodes = graphData.nodes.map((d) => Object.create(d));
+  const links = graphData.links.map((d) => Object.create(d));
 
-    const radius = 5;
-    const color = d3.scaleOrdinal(d3.schemeCategory10);
+  const radius = 5;
+  const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    const simulation = d3.forceSimulation()
-        .nodes(nodes)
-        .force("link", d3.forceLink(links).id(d => d.id))
-        .force("charge", d3.forceManyBody().strength(charge))
-        .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("collide", d3.forceCollide().radius(2).strength(5))
-        .force('x', d3.forceX().x(d => xPoint(d, width)))
-        .force('y', d3.forceY().y(height / 2))
-    ;
+  const simulation = d3
+    .forceSimulation()
+    .nodes(nodes)
+    .force(
+      "link",
+      d3.forceLink(links).id((d) => d.id)
+    )
+    .force("charge", d3.forceManyBody().strength(charge))
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    .force("collide", d3.forceCollide().radius(2).strength(5))
+    .force(
+      "x",
+      d3.forceX().x((d) => xPoint(d, width))
+    )
+    .force("y", d3.forceY().y(height / 2));
+  const svg = d3
+    .select(canvas)
+    .attr("width", width)
+    .attr("height", height)
+    .attr("strength", charge)
+    .style("border", "1px solid black")
+    .style("font", "12px sans-serif");
 
-    const svg = d3.select(canvas)
-        .attr("width", width)
-        .attr("height", height)
-        .attr("strength", charge)
-        .style("border", "1px solid black")
-        .style("font", "12px sans-serif");
+  svg.selectAll("*").remove();
 
-    svg.selectAll("*").remove();
+  const link = svg
+    .append("g")
+    .attr("stroke", "#999")
+    .attr("stroke-opacity", 0.6)
+    .selectAll("line")
+    .data(links)
+    .join("line")
+    //.attr("stroke-width", d => Math.sqrt(d.value))
+    .attr("data-testid", "line")
+    .attr("stroke", (d) => color(d.category));
 
-    const link = svg.append("g")
-        .attr("stroke", "#999")
-        .attr("stroke-opacity", 0.6)
-        .selectAll("line")
-        .data(links)
-        .join("line")
-        //.attr("stroke-width", d => Math.sqrt(d.value))
-        .attr("data-testid", "line")
-        .attr("stroke", d => color(d.category));
+  const node = svg
+    .append("g")
+    .attr("stroke", "#fff")
+    .attr("stroke-width", 1.5)
+    .selectAll("circle")
+    .data(nodes)
+    .enter()
+    .append("circle")
+    .attr("r", radius)
+    .attr("fill", (d) => color(d.group))
+    .attr("data-testid", "circle")
+    .call(drag(simulation));
 
-    const node = svg.append("g")
-        .attr("stroke", "#fff")
-        .attr("stroke-width", 1.5)
-        .selectAll("circle")
-        .data(nodes)
-        .enter().append("circle")
-        .attr("r", radius)
-        .attr("fill", d => color(d.group))
-        .attr("data-testid", "circle")
-        .call(drag(simulation));
+  const text = svg
+    .append("g")
+    .attr("stroke", "black")
+    .attr("fill", "#fff")
+    .selectAll("text")
+    .data(nodes)
+    .enter()
+    .append("text")
+    .text((d) => d.id);
 
-    const text = svg.append("g")
-        .attr("stroke", "black")
-        .attr("fill", "#fff")
-        .selectAll("text")
-        .data(nodes)
-        .enter().append("text")
-        .text(d => d.id);
+  simulation.on("tick", () => {
+    link
+      .attr("x1", (d) => d.source.x)
+      .attr("y1", (d) => d.source.y)
+      .attr("x2", (d) => d.target.x)
+      .attr("y2", (d) => d.target.y);
 
-    simulation.on("tick", () => {
-        link
-            .attr("x1", d => d.source.x)
-            .attr("y1", d => d.source.y)
-            .attr("x2", d => d.target.x)
-            .attr("y2", d => d.target.y);
+    node
+      .attr(
+        "cx",
+        (d) =>
+          (d.ChargePicker = Math.max(
+            2 * radius,
+            Math.min(width - 2 * radius, d.x)
+          ))
+      )
+      .attr(
+        "cy",
+        (d) => (d.y = Math.max(2 * radius, Math.min(height - 2 * radius, d.y)))
+      );
 
-        node
-            .attr("cx", d => d.ChargePicker = Math.max(2*radius, Math.min(width - 2*radius, d.x)))
-            .attr("cy", d => d.y = Math.max(2*radius, Math.min(height - 2*radius, d.y)));
-
-        text
-            .attr("x", d => d.x)
-            .attr("y", d => d.y);
-    });
-}
+    text.attr("x", (d) => d.x).attr("y", (d) => d.y);
+  });
+};
 
 const drag = (simulation) => {
-    function dragstarted(event, d) {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
-        d.fx = d.x;
-        d.fy = d.y;
-    }
+  function dragstarted(event, d) {
+    if (!event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+  }
 
-    function dragged(event, d) {
-        d.fx = event.x;
-        d.fy = event.y;
-    }
+  function dragged(event, d) {
+    d.fx = event.x;
+    d.fy = event.y;
+  }
 
-    function dragended(event, d) {
-        if (!event.active) simulation.alphaTarget(0);
-        d.fx = null;
-        d.fy = null;
-    }
+  function dragended(event, d) {
+    if (!event.active) simulation.alphaTarget(0);
+    d.fx = null;
+    d.fy = null;
+  }
 
-    return d3.drag()
-        .on("start", dragstarted)
-        .on("drag", dragged)
-        .on("end", dragended);
+  return d3
+    .drag()
+    .on("start", dragstarted)
+    .on("drag", dragged)
+    .on("end", dragended);
 };
 
 const xPoint = (d, width) => {
-    if (d.x <= width/2) {
-        return width/4;
-    }
-    if (d.x > width/2) {
-        return 3 * width/4;
-    }
-    return width/2;
+  if (d.x <= width / 2) {
+    return width / 4;
+  }
+  if (d.x > width / 2) {
+    return (3 * width) / 4;
+  }
+  return width / 2;
 };
