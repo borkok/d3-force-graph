@@ -2,18 +2,12 @@ import React from "react";
 import RelationVisualizer from "./RelationVisualizer";
 import renderConnected from "../../test/utils/renderConnected";
 
-jest.mock("./useWindowDimensions", () => ({
+jest.mock("./useElementDimensions", () => ({
   __esModule: true,
-  default: () => ({ height: 123, width: 987 }),
+  default: () => ([ 123, 987 ]),
 }));
 
 describe("relation visualizer component test", () => {
-  it("should have dimensions from window", () => {
-    const utils = renderConnected(<RelationVisualizer margin="100" />, {});
-    const svg = utils.getByTestId("svg-canvas");
-    expect(svg).toHaveAttribute("height", "23");
-    expect(svg).toHaveAttribute("width", "887");
-  });
 
   it("should show spinner if loading", () => {
     const utils = renderConnected(<RelationVisualizer />, {

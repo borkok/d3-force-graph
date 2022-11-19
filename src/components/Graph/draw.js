@@ -59,10 +59,9 @@ export const drawGraph = (graphData, width, height, charge, canvas) => {
     .force("y", d3.forceY().y(height / 2));
   const svg = d3
     .select(canvas)
-    .attr("width", width)
-    .attr("height", height)
+    //.attr("width", width)
+    //.attr("height", height)
     .attr("strength", charge)
-    .style("border", "1px solid black")
     .style("font", "12px sans-serif");
 
   svg.selectAll("*").remove();

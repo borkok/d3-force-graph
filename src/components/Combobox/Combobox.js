@@ -1,16 +1,8 @@
-import React, { useState } from "react";
-import { makeStyles } from "@mui/styles";
+import React, {useState} from "react";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    fullWidth: true,
-    minWidth: 200,
-  },
-}));
 
 /**
  * Combobox component
@@ -20,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
  * @param label - field label
  */
 const Combobox = ({ items, changed, label }) => {
-  const classes = useStyles();
   const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -39,7 +30,7 @@ const Combobox = ({ items, changed, label }) => {
 
   return (
     <div>
-      <FormControl variant="filled" className={classes.formControl}>
+      <FormControl variant="filled" sx={{ m: 1, minWidth: 200 }}>
         <InputLabel id="select-label">{label}</InputLabel>
         <Select
           data-testid="testselect"
